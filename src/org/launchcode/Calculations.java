@@ -6,76 +6,115 @@ import java.util.List;
 
 public class Calculations {
 
-        //finds the maximum streak of "yes" responses to boolean questions
-        public static int maxTrueStreak(List<Boolean> boolList) {
+    //finds the maximum streak of "yes" responses to boolean questions
+    public static int maxTrueStreak(List<Boolean> boolList) {
 
-            int longestStreak = 0;
-            int currentStreak = 0;
-            for (boolean item : boolList) {
-
-                if (item == true) {
-                    currentStreak++;
-
-                    if (currentStreak > longestStreak) {
-                        longestStreak = currentStreak;
-                    }
-
-                } else {
-                    currentStreak = 0;
+        int longestStreak = 0;
+        int currentStreak = 0;
+        for (boolean item : boolList) {
+            if (item == true) {
+                currentStreak++;
+                if (currentStreak > longestStreak) {
+                    longestStreak = currentStreak;
                 }
+            } else {
+                currentStreak = 0;
             }
-
-            return longestStreak;
         }
+        return longestStreak;
+    }
 
-        //finds the maximum streak of "0" responses to integer questions
-        public static int maxZeroStreak(List<Integer> intList) {
+    //finds the maximum streak of "0" responses to integer questions
+    public static int maxZeroStreak(List<Integer> intList) {
 
-            int longestStreak = 0;
-            int currentStreak = 0;
-            for (int item : intList) {
-
-                if (item == 0) {
-                    currentStreak++;
-
-                    if (currentStreak > longestStreak) {
-                        longestStreak = currentStreak;
-                    }
-
-                } else {
-                    currentStreak = 0;
+        int longestStreak = 0;
+        int currentStreak = 0;
+        for (int item : intList) {
+            if (item == 0) {
+                currentStreak++;
+                if (currentStreak > longestStreak) {
+                    longestStreak = currentStreak;
                 }
+            } else {
+                currentStreak = 0;
             }
-
-            return longestStreak;
         }
+        return longestStreak;
+    }
 
-        public static void main(String[] args) {
-            ArrayList<Boolean> testBoolArray = new ArrayList<>();
-            testBoolArray.add(true);
-            testBoolArray.add(true);
-            testBoolArray.add(true);
-            testBoolArray.add(true);
-            testBoolArray.add(false);
-            testBoolArray.add(true);
-            testBoolArray.add(true);
-            testBoolArray.add(false);
+    public static double averageScoreBoolean(List<Integer> scoreIntList, List<Boolean> boolList, boolean condition) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (int i = 0; i < boolList.size(); i++) {
+            if (boolList.get(i) == condition) {
+                sum += scoreIntList.get(i);
+                conditionCount++;
+            }
+        } return sum/conditionCount;
+    }
 
-            System.out.println(maxTrueStreak(testBoolArray));
+    public static double averageScoreTwoBoolean(List<Integer> scoreIntList, List<Boolean> boolList,
+                                                List<Boolean> boolListTwo, boolean condition, boolean conditionTwo) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (int i = 0; i < boolList.size(); i++) {
+            if (boolList.get(i) == condition && boolListTwo.get(i) == conditionTwo) {
+                sum += scoreIntList.get(i);
+                conditionCount++;
+            }
+        } return sum/conditionCount;
+    }
 
-            ArrayList<Integer> testIntArray = new ArrayList<>();
-            testIntArray.add(2);
-            testIntArray.add(2);
-            testIntArray.add(2);
-            testIntArray.add(2);
-            testIntArray.add(0);
-            testIntArray.add(0);
-            testIntArray.add(0);
-            testIntArray.add(5);
+    public static double averageScoreBooleanAndInt(List<Integer> scoreIntList, List<Boolean> boolList,
+                                                List<Integer> intList, boolean condition, int conditionInt) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (int i = 0; i < boolList.size(); i++) {
+            if (boolList.get(i) == condition && intList.get(i) <= conditionInt) {
+                sum += scoreIntList.get(i);
+                conditionCount++;
+            }
+        } return sum/conditionCount;
+    }
 
-            System.out.println(maxZeroStreak(testIntArray));
+    public static double averageScoreInt(List<Integer> scoreIntList, List<Integer> otherIntList, int conditionInt) {
+        double sum = 0;
+        int conditionCount = 0;
+        for (int i = 0; i < otherIntList.size(); i++) {
+            if (otherIntList.get(i) <= conditionInt) {
+                sum += scoreIntList.get(i);
+                conditionCount++;
+            }
+        } return sum/conditionCount;
+    }
+        
+    public static void main(String[] args) {
+        ArrayList<Boolean> testBoolArray = new ArrayList<>();
+        testBoolArray.add(true);
+        testBoolArray.add(true);
+        testBoolArray.add(true);
+        testBoolArray.add(true);
+        testBoolArray.add(false);
+        testBoolArray.add(true);
+        testBoolArray.add(true);
+        testBoolArray.add(false);
 
-        }
+        System.out.println(maxTrueStreak(testBoolArray));
+
+        ArrayList<Integer> testIntArray = new ArrayList<>();
+        testIntArray.add(2);
+        testIntArray.add(2);
+        testIntArray.add(2);
+        testIntArray.add(2);
+        testIntArray.add(0);
+        testIntArray.add(0);
+        testIntArray.add(0);
+        testIntArray.add(5);
+
+        System.out.println(maxZeroStreak(testIntArray));
+
+        System.out.println(averageScoreBoolean(testIntArray, testBoolArray, false));
+    }
 
 
 }
